@@ -18,6 +18,10 @@ public class BubbleFrame extends JFrame {
 		initData();
 		setInitLayout();
 		addEventListener();
+
+		// player new 되어있는상태
+		// 약속 run 메소드안에 동작을 처리한다.
+		new Thread(new BackgourndgroudnPlayerservice(player)).start();
 	}
 
 	private void initData() {
@@ -56,12 +60,16 @@ public class BubbleFrame extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_RIGHT:
-					if (!player.isRight()) {
+					// 여러번 누르더라도 한번만 호출 되게 방어적 코드 작성
+					// false
+					// true ← 변경!!
+					// 한번 더 ← 현재 상태 값 true
+					if (!player.isRight() && !player.isLeftWallCrash()) {
 						player.right();
 					}
 					break;
 				case KeyEvent.VK_LEFT:
-					if (!player.isLeft()) {
+					if (!player.isLeft() && !player.isRightWallCrash()) {
 						player.left();
 					}
 					break;

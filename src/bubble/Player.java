@@ -12,6 +12,10 @@ public class Player extends JLabel implements Movable {
 	private boolean isUp;
 	private boolean isDown;
 
+	// 벽에 충돌한 상태
+	private boolean leftWallCrash;
+	private boolean rightWallCrash;
+
 	private ImageIcon playerL, playerR;
 
 	private final int SPEED = 4;
@@ -25,10 +29,18 @@ public class Player extends JLabel implements Movable {
 	private void initData() {
 		this.playerL = new ImageIcon("images/playerL.png");
 		this.playerR = new ImageIcon("images/playerR.png");
+
+		isLeft = false;
+		isRight = false;
+		isUp = false;
+		isDown = false;
+		leftWallCrash = false;
+		rightWallCrash = false;
 	}
 
 	private void setInitLayout() {
-		this.x = 55;
+//		this.x = 55;
+		this.x = 500;
 		this.y = 535;
 		// 좌표기반, 라벨에 크기를 지정해야 한다.
 		setSize(50, 50);
@@ -139,4 +151,21 @@ public class Player extends JLabel implements Movable {
 	public void setDown(boolean isDown) {
 		this.isDown = isDown;
 	}
+
+	public boolean isLeftWallCrash() {
+		return leftWallCrash;
+	}
+
+	public void setLeftWallCrash(boolean leftWallCrash) {
+		this.leftWallCrash = leftWallCrash;
+	}
+
+	public boolean isRightWallCrash() {
+		return rightWallCrash;
+	}
+
+	public void setRightWallCrash(boolean rightWallCrash) {
+		this.rightWallCrash = rightWallCrash;
+	}
+
 }

@@ -14,34 +14,35 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class BGM {
 	AudioInputStream bgm;
 	File file;
-	
+
 	public BGM(String filePath) {
 		try {
 			this.file = new File(filePath);
-			this.bgm = AudioSystem.getAudioInputStream(this.file);	
+			this.bgm = AudioSystem.getAudioInputStream(this.file);
 			playSound();
-		} catch(UnsupportedAudioFileException e1) {
+		} catch (UnsupportedAudioFileException e1) {
 			System.out.println("지원하지 않는 파일 형식입니다.");
-		} catch(IOException e2) {
+		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
 	}
+
 	public void playSound() {
-		try {			
+		try {
 			Clip bgmClip = AudioSystem.getClip();
 			bgmClip.addLineListener(new LineListener() {
 				@Override
 				public void update(LineEvent event) {
-					if(event.getType() == LineEvent.Type.STOP) {
+					if (event.getType() == LineEvent.Type.STOP) {
 						bgmClip.close();
 					}
 				}
 			});
 			bgmClip.open(this.bgm);
 			bgmClip.start();
-		}catch(LineUnavailableException e1) {
+		} catch (LineUnavailableException e1) {
 			e1.printStackTrace();
-		}catch(IOException e2) {
+		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
 	}
