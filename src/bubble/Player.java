@@ -16,6 +16,8 @@ public class Player extends JLabel implements Movable {
 	private boolean leftWallCrash;
 	private boolean rightWallCrash;
 
+	// 점프
+	private boolean isJump;
 	private ImageIcon playerL, playerR;
 
 	private final int SPEED = 4;
@@ -36,6 +38,7 @@ public class Player extends JLabel implements Movable {
 		isDown = false;
 		leftWallCrash = false;
 		rightWallCrash = false;
+		isJump = false;
 	}
 
 	private void setInitLayout() {
@@ -89,6 +92,7 @@ public class Player extends JLabel implements Movable {
 	public void up() {
 		new Thread(() -> {
 			this.isUp = true;
+			this.isJump = true;
 			for (int i = 0; i < 130 / JUMPSPEED; i++) {
 				this.y -= JUMPSPEED;
 				setLocation(this.x, this.y);
@@ -105,18 +109,19 @@ public class Player extends JLabel implements Movable {
 
 	@Override
 	public void down() {
+		this.isDown = true;
 		new Thread(() -> {
-			this.isDown = true;
-			for (int i = 0; i < 130 / JUMPSPEED; i++) {
-				this.y += JUMPSPEED;
+			while(this.isDown) {
+				this.y += this.JUMPSPEED;
 				setLocation(this.x, this.y);
 				try {
-					Thread.sleep(3);
-				} catch (InterruptedException e) {
+					Thread.sleep(3);					
+				} catch(InterruptedException e) {
 					e.printStackTrace();
 				}
+				this.isDown = false;
+				this.isJump = true;
 			}
-			this.isDown = false;
 		}).start();
 	}
 
@@ -168,4 +173,10 @@ public class Player extends JLabel implements Movable {
 		this.rightWallCrash = rightWallCrash;
 	}
 
+	public boolean isJumped() {
+		return isJump;
+	}
+	public void setJumped(boolean isJump) {
+		this.isJump = isJump;
+	}
 }

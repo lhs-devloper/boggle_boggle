@@ -21,7 +21,7 @@ public class BubbleFrame extends JFrame {
 
 		// player new 되어있는상태
 		// 약속 run 메소드안에 동작을 처리한다.
-		new Thread(new BackgourndgroudnPlayerservice(player)).start();
+		new Thread(new BackgourndgroudnPlayerService(player)).start();
 	}
 
 	private void initData() {
@@ -74,15 +74,16 @@ public class BubbleFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_UP:
-					if (!player.isUp()) {
+					if (!player.isUp() && !player.isJumped()) {
 						player.up();
+						System.out.println(player.getY());
 					}
 					break;
-				case KeyEvent.VK_DOWN:
-					if (!player.isDown()) {
-						player.down();
-					}
-					break;
+//				case KeyEvent.VK_DOWN:
+//					if (!player.isDown()) {
+//						player.down();
+//					}
+//					break;
 				}
 			}
 		});
