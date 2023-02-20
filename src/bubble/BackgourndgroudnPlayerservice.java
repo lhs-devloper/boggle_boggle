@@ -39,8 +39,8 @@ public class BackgourndgroudnPlayerService implements Runnable {
 			// Color bottomColor = new Color(image.getRGB(player.getX()+10,
 			// player.getY()+60));
 			// - 65536, -16776961, -1
-			int bottomColorLeft = image.getRGB(player.getX() + 10, player.getY() + 45);
-			int bottomColorRight = image.getRGB(player.getX() + 45, player.getY() + 45);
+			int bottomColorLeft = image.getRGB(player.getX() + 10, player.getY() + 60);
+			int bottomColorRight = image.getRGB(player.getX() + 45, player.getY() + 60);
 			// 하얀색이 아니면 바닥이다.
 			if (bottomColorLeft+bottomColorRight != -2) {
 				player.setDown(false);
