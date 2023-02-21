@@ -79,6 +79,11 @@ public class BubbleFrame extends JFrame {
 //						System.out.println(player.getY());
 					}
 					break;
+					
+				case KeyEvent.VK_SPACE:
+					Bubble bubble = new Bubble(player);
+					add(bubble);
+					break;
 //				case KeyEvent.VK_DOWN:
 //					if (!player.isDown()) {
 //						player.down();
@@ -89,6 +94,8 @@ public class BubbleFrame extends JFrame {
 		});
 	}
 
+	// ***** 자바 프로그램 중 main 함수를 가지는 클래스는
+	// 프로그램에서 사용하는 모든 참조값을 알 수 잇다.
 	public static void main(String[] args) {
 		new BubbleFrame();
 	} // end of main

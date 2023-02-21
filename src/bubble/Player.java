@@ -4,6 +4,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Player extends JLabel implements Movable {
+	// 플레이어에 방향 상태(enum 타입 사용: 데이터의 범주화)
+	PlayerWay pWay;
+	
 	private int x;
 	private int y;
 
@@ -32,6 +35,7 @@ public class Player extends JLabel implements Movable {
 		this.playerL = new ImageIcon("images/playerL.png");
 		this.playerR = new ImageIcon("images/playerR.png");
 
+		pWay = PlayerWay.RIGHT;
 		isLeft = false;
 		isRight = false;
 		isUp = false;
@@ -56,8 +60,9 @@ public class Player extends JLabel implements Movable {
 	public void left() {
 		// TODO Auto-generated method stub
 		setIcon(this.playerL);
+		pWay = PlayerWay.LEFT;
+		this.isLeft = true;
 		new Thread(() -> {
-			this.isLeft = true;
 			while (this.isLeft) {
 				this.x -= SPEED;
 				setLocation(this.x, this.y);
@@ -74,8 +79,9 @@ public class Player extends JLabel implements Movable {
 	public void right() {
 		// TODO Auto-generated method stub
 		setIcon(this.playerR);
+		pWay = PlayerWay.RIGHT;
+		this.isRight = true;
 		new Thread(() -> {
-			this.isRight = true;
 			while (this.isRight) {
 				this.x += SPEED;
 				setLocation(this.x, this.y);
@@ -178,5 +184,9 @@ public class Player extends JLabel implements Movable {
 	}
 	public void setJumped(boolean isJump) {
 		this.isJump = isJump;
+	}
+
+	public PlayerWay getpWay() {
+		return pWay;
 	}
 }
