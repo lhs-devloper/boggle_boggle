@@ -20,11 +20,13 @@ public class Bubble extends JLabel implements Movable {
 	private ImageIcon bomb; // 물방울이 터진 상태 이미지
 
 	private Player player;
+	private BackgroundBubbleService backgroundBubbleService;
 
 	// 버블은 player에 의존하고있다.
 	public Bubble(Player player) {
 		this.player = player;
 		initData();
+		backgroundBubbleService = new BackgroundBubbleService(this);
 		setInitLayout();
 	}
 
@@ -72,6 +74,9 @@ public class Bubble extends JLabel implements Movable {
 		for (int i = 0; i < 400; i++) {
 			this.x--;
 			setLocation(this.x, this.y);
+			if(backgroundBubbleService.leftWall()) {
+				break;
+			}
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
@@ -87,6 +92,9 @@ public class Bubble extends JLabel implements Movable {
 		for (int i = 0; i < 400; i++) {
 			this.x++;
 			setLocation(this.x, this.y);
+			if(backgroundBubbleService.rightWall()) {
+				break;
+			}
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
@@ -102,6 +110,9 @@ public class Bubble extends JLabel implements Movable {
 		while(true) {
 			this.y--;
 			setLocation(this.x, this.y);
+			if(backgroundBubbleService.topWall()) {
+				break;
+			}
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {

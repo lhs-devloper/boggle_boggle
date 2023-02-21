@@ -31,10 +31,9 @@ public class BackgourndgroudnPlayerService implements Runnable {
 		while (true) {
 			// 기준 왼쪽
 			Color leftColor = new Color(image.getRGB(player.getX(), player.getY()+25));
-
 			// 기준 오른쪽
 			Color rightColor = new Color(image.getRGB(player.getX() + 60, player.getY()+25));
-
+			
 			// 바닥 충돌 감지
 			// Color bottomColor = new Color(image.getRGB(player.getX()+10,
 			// player.getY()+60));
