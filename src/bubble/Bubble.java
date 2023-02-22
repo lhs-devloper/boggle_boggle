@@ -120,5 +120,20 @@ public class Bubble extends JLabel implements Movable {
 				e.printStackTrace();
 			}
 		}
+		clearBubble();
+	}
+	// 메소드 행위(동사) → (목적어)
+	private void clearBubble() {
+		try {
+			Thread.sleep(2000);
+			setIcon(bomb);
+			// 터진다음에 0.5초 다음에 그림을 지우기
+			Thread.sleep(500);
+			setIcon(null);
+			// repaint(); //
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

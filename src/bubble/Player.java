@@ -4,6 +4,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Player extends JLabel implements Movable {
+	
+	BubbleFrame mContext;
+	
 	// 플레이어에 방향 상태(enum 타입 사용: 데이터의 범주화)
 	PlayerWay pWay;
 	
@@ -26,7 +29,8 @@ public class Player extends JLabel implements Movable {
 	private final int SPEED = 4;
 	private final int JUMPSPEED = 2;
 
-	public Player() {
+	public Player(BubbleFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
 	}
@@ -131,6 +135,11 @@ public class Player extends JLabel implements Movable {
 		}).start();
 	}
 
+	public void attack() {
+		Bubble bubble = new Bubble(this);
+		mContext.add(bubble);
+	}
+	
 	public boolean isRight() {
 		return isRight;
 	}

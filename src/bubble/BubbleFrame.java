@@ -8,7 +8,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+
+// ** main 가지는 클래스는 프로그램에 사용하는 참조변수를 다 알 수 있다.
 public class BubbleFrame extends JFrame {
+	private BubbleFrame mContext = this;
+	
 	private JLabel backgroundMap;
 	private Player player;
 
@@ -26,11 +30,14 @@ public class BubbleFrame extends JFrame {
 
 	private void initData() {
 		this.backgroundMap = new JLabel(new ImageIcon("images/backgroundMap.png"));
-		this.player = new Player();
+		
 		this.bgm = new BGM("music/boggle.wav");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1000, 640);
+		// 1. 부모에 주소값을 자식 객체한테 던져 주면 된다.
+		// 2. 콜백메소드 활용서 구현할 수 있다.
+		this.player = new Player(mContext);
 	}
 
 	private void setInitLayout() {
@@ -81,8 +88,7 @@ public class BubbleFrame extends JFrame {
 					break;
 					
 				case KeyEvent.VK_SPACE:
-					Bubble bubble = new Bubble(player);
-					add(bubble);
+					player.attack();
 					break;
 //				case KeyEvent.VK_DOWN:
 //					if (!player.isDown()) {
