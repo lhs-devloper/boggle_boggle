@@ -130,7 +130,7 @@ public class Bubble extends JLabel implements Movable {
 			// 터진다음에 0.5초 다음에 그림을 지우기
 			Thread.sleep(500);
 			setIcon(null);
-			// repaint(); //
+			// repaint(); // 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -15,7 +15,8 @@ public class BubbleFrame extends JFrame {
 	
 	private JLabel backgroundMap;
 	private Player player;
-
+	private Enemy enemy;
+	
 	private BGM bgm;
 
 	public BubbleFrame() {
@@ -38,11 +39,13 @@ public class BubbleFrame extends JFrame {
 		// 1. 부모에 주소값을 자식 객체한테 던져 주면 된다.
 		// 2. 콜백메소드 활용서 구현할 수 있다.
 		this.player = new Player(mContext);
+		this.enemy = new Enemy();
 	}
 
 	private void setInitLayout() {
 		setLayout(null);
 		add(player);
+		add(enemy);
 		setResizable(false);
 		setLocationRelativeTo(backgroundMap);
 		setVisible(true);
