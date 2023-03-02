@@ -26,7 +26,8 @@ public class BubbleFrame extends JFrame {
 
 		// player new 되어있는상태
 		// 약속 run 메소드안에 동작을 처리한다.
-		new Thread(new BackgourndgroudnPlayerService(player)).start();
+		new Thread(new BackgourndPlayerService(player)).start();
+		new Thread(new BackgourndEnemyService(enemy)).start();
 	}
 
 	private void initData() {
@@ -103,6 +104,16 @@ public class BubbleFrame extends JFrame {
 		});
 	}
 
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public Enemy getEnemy() {
+		return enemy;
+	}
+	public void setEnemy(Enemy enemy) {
+		this.enemy = enemy;
+	}
 	// ***** 자바 프로그램 중 main 함수를 가지는 클래스는
 	// 프로그램에서 사용하는 모든 참조값을 알 수 잇다.
 	public static void main(String[] args) {

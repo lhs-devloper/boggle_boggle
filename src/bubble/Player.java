@@ -4,12 +4,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Player extends JLabel implements Movable {
-	
+
 	BubbleFrame mContext;
-	
+
 	// 플레이어에 방향 상태(enum 타입 사용: 데이터의 범주화)
 	PlayerWay pWay;
-	
+
 	private int x;
 	private int y;
 
@@ -121,12 +121,12 @@ public class Player extends JLabel implements Movable {
 	public void down() {
 		this.isDown = true;
 		new Thread(() -> {
-			while(this.isDown) {
+			while (this.isDown) {
 				this.y += this.JUMPSPEED;
 				setLocation(this.x, this.y);
 				try {
-					Thread.sleep(3);					
-				} catch(InterruptedException e) {
+					Thread.sleep(3);
+				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				this.isDown = false;
@@ -136,10 +136,10 @@ public class Player extends JLabel implements Movable {
 	}
 
 	public void attack() {
-		Bubble bubble = new Bubble(this);
+		Bubble bubble = new Bubble(this.mContext);
 		mContext.add(bubble);
 	}
-	
+
 	public boolean isRight() {
 		return isRight;
 	}
@@ -191,6 +191,7 @@ public class Player extends JLabel implements Movable {
 	public boolean isJumped() {
 		return isJump;
 	}
+
 	public void setJumped(boolean isJump) {
 		this.isJump = isJump;
 	}

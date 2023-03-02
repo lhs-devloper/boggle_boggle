@@ -1,12 +1,14 @@
 package bubble;
 
-import java.nio.channels.InterruptedByTimeoutException;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Enemy extends JLabel implements Movable{
 
+	// 0, 1
+	// 살아있는 상태, 물방울에 죽은 상태
+	private int state;
+	
 	// 위치 상태
 	private int x;
 	private int y;
@@ -16,6 +18,11 @@ public class Enemy extends JLabel implements Movable{
 	private boolean right;
 	private boolean up;
 	private boolean down;
+	
+//	private int JUMPCOUNT = 0;
+//	private int FIRST = 0;
+	
+	private boolean leftWallCrash, rightWallCrash;
 	
 	// 적군 속도 상태
 	private final int SPEED =3 ;
@@ -28,8 +35,7 @@ public class Enemy extends JLabel implements Movable{
 	public Enemy() {
 		initData();
 		setInitLayout();
-		
-		up();
+		left();
 	}
 	private void initData() {
 		enemyL = new ImageIcon("images/enemyL.png");
@@ -40,8 +46,11 @@ public class Enemy extends JLabel implements Movable{
 		right = false;
 		up = false;
 		down = false;
+		leftWallCrash= false;
+		rightWallCrash = false;
 		
 		enemyWay = EnemyWay.LEFT;
+		state = 0;
 	}
 	private void setInitLayout() {
 		setIcon(enemyL);
@@ -53,12 +62,13 @@ public class Enemy extends JLabel implements Movable{
 		// TODO Auto-generated method stub
 		enemyWay = EnemyWay.LEFT;
 		left = true;
+		setIcon(enemyL);
 		new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				while(true) {
+				while(left) {
 					x -= SPEED;
 					setLocation(x, y);
 					try {
@@ -81,7 +91,7 @@ public class Enemy extends JLabel implements Movable{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				while(true) {
+				while(right) {
 					x += SPEED;
 					setLocation(x, y);
 					try {
@@ -117,7 +127,7 @@ public class Enemy extends JLabel implements Movable{
 	public void down() {
 		down = true;
 		new Thread(()->{
-			while(true) {
+			while(down) {
 				 y += JUMPSPEED;
 				 setLocation(x,y);
 				 try {
@@ -125,9 +135,52 @@ public class Enemy extends JLabel implements Movable{
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				 down = false;
 			 }
 		}).start();
-		down = false;
 	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
+	public boolean isLeft() {
+		return left;
+	}
+	public void setLeft(boolean left) {
+		this.left = left;
+	}
+	public boolean isRight() {
+		return right;
+	}
+	public void setRight(boolean right) {
+		this.right = right;
+	}
+	public boolean isUp() {
+		return up;
+	}
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+	public boolean isDown() {
+		return down;
+	}
+	public void setDown(boolean down) {
+		this.down = down;
+	}
+	public boolean isLeftWallCrash() {
+		return leftWallCrash;
+	}
+	public void setLeftWallCrash(boolean leftWallCrash) {
+		this.leftWallCrash = leftWallCrash;
+	}
+	public boolean isRightWallCrash() {
+		return rightWallCrash;
+	}
+	public void setRightWallCrash(boolean rightWallCrash) {
+		this.rightWallCrash = rightWallCrash;
+	}
+	
 	
 }
